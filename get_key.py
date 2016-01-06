@@ -10,7 +10,7 @@ import time
 from   socket      import *
 
 udp_send_sock = socket(AF_INET, SOCK_DGRAM)
-UDP_SEND_ADDRESS = (localhost, 10000)
+UDP_SEND_ADDRESS = ('', 10000)
 #This function is called every time a key is presssed
 def kbevent( event ):
     #print key info
