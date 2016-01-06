@@ -1,25 +1,35 @@
-#!/usr/bin/env python
-# gey_key.py
-# Get keystrokes from keyboard
-# respond to a key without the need to press enter
-import Tkinter as tk
-def keypress(event):
-    if event.keysym == 'Escape':
-        root.destroy()
-    x = event.char
-    if x == "w":
-        print "blaw blaw blaw"
-    elif x == "a":
-        print "blaha blaha blaha"
-    elif x == "s":
-        print "blash blash blash"
-    elif x == "d":
-        print "blad blad blad"
-    else:
-        print x
-root = tk.Tk()
-print "Press a key (Escape key to exit):"
-root.bind_all('<Key>', keypress)
-# don't show the tk window
-root.withdraw()
-root.mainloop()
+"""
+A simple example of hooking the keyboard on Linux using pyxhook
+Any key pressed prints out the keys values, program terminates when spacebar is pressed
+"""
+
+#Libraries we need
+import pyxhook
+import time
+
+#This function is called every time a key is presssed
+def kbevent( event ):
+    #print key info
+    print event
+    
+    #If the ascii value matches spacebar, terminate the while loop
+    if event.Ascii == 32:
+        global running
+        running = False
+
+#Create hookmanager
+hookman = pyxhook.HookManager()
+#Define our callback to fire when a key is pressed down
+hookman.KeyDown = kbevent
+#Hook the keyboard
+hookman.HookKeyboard()
+#Start our listener
+hookman.start()
+    
+#Create a loop to keep the application running
+running = True
+while running:
+    time.sleep(0.1)
+
+#Close the listener when we are done
+hookman.cancel()
