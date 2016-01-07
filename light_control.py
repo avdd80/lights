@@ -8,7 +8,7 @@ import time
 HOST = ''
 PORT = 10000
 ADDR = (HOST,PORT)
-BUFSIZE = 64
+BUFSIZE = 128
 
 pwm = PWM (0x40, debug=False)
 pwm.setPWMFreq (400)
@@ -87,13 +87,22 @@ while True:
         lamp_A_status = 1 - lamp_A_status
         pwm.setPWM (0, 0, lamp_A_status * 4095)
 
-    elif (data == "Next"):
-        lamp_A_status = 1 - lamp_B_status
-        pwm.setPWM (1, 0, lamp_B_status * 4095)
-
     elif (data == "slash"):
         lamp_C_status = 1 - lamp_C_status
+        pwm.setPWM (1, 0, lamp_C_status * 4095)
+
+    elif (data == "Next"):
+        lamp_A_status = 1 - lamp_B_status
+        pwm.setPWM (2, 0, lamp_B_status * 4095)
+
+    elif (data == "Space"):
+        lamp_A_status = 1 - lamp_A_status
+        lamp_B_status = 1 - lamp_B_status
+        lamp_C_status = 1 - lamp_C_status
+        pwm.setPWM (0, 0, lamp_A_status * 4095)
+        pwm.setPWM (1, 0, lamp_B_status * 4095)
         pwm.setPWM (2, 0, lamp_C_status * 4095)
+        
 
     elif (data == "Up"):
         set_three_channels (current_red_pwm + 409, current_green_pwm, current_blue_pwm)
@@ -107,10 +116,10 @@ while True:
     elif (data == "Left"):
         set_three_channels (current_red_pwm, current_green_pwm - 409, current_blue_pwm)
 
-    elif (data == "B"):
+    elif (data == "[269025043]"):
         set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
 
-    elif (data == "B"):
+    elif (data == "[269025041]"):
         set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
 
 
