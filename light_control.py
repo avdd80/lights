@@ -24,6 +24,9 @@ current_red_pwm   = 4095
 current_green_pwm = 4095
 current_blue_pwm  = 4095
 
+lamp_A_status = 0
+lamp_B_status = 0
+lamp_C_status = 0
 
 # This function ramps up/down the PWM at a specified rate on a
 # specified channel. The second argument is the start PWM value
@@ -65,9 +68,6 @@ def set_three_channels (end_red_val, end_green_val, end_blue_val):
     
 def init ():
     
-    lamp_A_status = 0
-    lamp_B_status = 0
-    lamp_C_status = 0
 
     pwm.setPWM (3, 0, lamp_A_status * 4095)
     pwm.setPWM (4, 0, lamp_B_status * 4095)
