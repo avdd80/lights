@@ -57,13 +57,13 @@ def ramp_pwm (channel, start_val, end_val, rate):
 
 def set_three_channels (end_red_val, end_green_val, end_blue_val):
     
-    start_red_val   = current_red_pwm
-    start_green_val = current_green_pwm
-    start_blue_val  = current_blue_pwm
+    global current_red_pwm
+    global current_green_pwm
+    global current_blue_pwm
     
-    ramp_pwm (CHANNEL_RED,   start_red_val,   end_red_val,   2)
-    ramp_pwm (CHANNEL_GREEN, start_green_val, end_green_val, 2)
-    ramp_pwm (CHANNEL_BLUE,  start_blue_val,  end_blue_val,  2)
+    ramp_pwm (CHANNEL_RED,   current_red_pwm,   end_red_val,   2)
+    ramp_pwm (CHANNEL_GREEN, current_green_pwm, end_green_val, 2)
+    ramp_pwm (CHANNEL_BLUE,  current_blue_pwm,  end_blue_val,  2)
 
 
     current_red_pwm   = end_red_val
