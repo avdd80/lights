@@ -99,7 +99,7 @@ while True:
         lamp_A_status = 1 - lamp_B_status
         pwm.setPWM (2, 0, lamp_B_status * 4095)
 
-    elif (data == "Space"):
+    elif (data == "space"):
         lamp_A_status = 1 - lamp_A_status
         lamp_B_status = 1 - lamp_B_status
         lamp_C_status = 1 - lamp_C_status
