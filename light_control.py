@@ -20,9 +20,9 @@ CHANNEL_RED   = 0
 CHANNEL_GREEN = 1
 CHANNEL_BLUE  = 2
 
-global current_red_pwm   = 4095
-global current_green_pwm = 4095
-global current_blue_pwm  = 4095
+current_red_pwm   = 4095
+current_green_pwm = 4095
+current_blue_pwm  = 4095
 
 lamp_A_status = 0
 lamp_B_status = 0
