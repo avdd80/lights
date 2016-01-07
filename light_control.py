@@ -20,9 +20,9 @@ CHANNEL_RED   = 0
 CHANNEL_GREEN = 1
 CHANNEL_BLUE  = 2
 
-current_red_pwm   = 4095
-current_green_pwm = 4095
-current_blue_pwm  = 4095
+global current_red_pwm   = 4095
+global current_green_pwm = 4095
+global current_blue_pwm  = 4095
 
 lamp_A_status = 0
 lamp_B_status = 0
@@ -57,9 +57,13 @@ def ramp_pwm (channel, start_val, end_val, rate):
 
 def set_three_channels (end_red_val, end_green_val, end_blue_val):
     
-    ramp_pwm (CHANNEL_RED,   current_red_pwm,   end_red_val,   2)
-    ramp_pwm (CHANNEL_GREEN, current_green_pwm, end_green_val, 2)
-    ramp_pwm (CHANNEL_BLUE,  current_blue_pwm,  end_blue_val,  2)
+    start_red_val   = current_red_pwm
+    start_green_val = current_green_pwm
+    start_blue_val  = current_blue_pwm
+    
+    ramp_pwm (CHANNEL_RED,   start_red_val,   end_red_val,   2)
+    ramp_pwm (CHANNEL_GREEN, start_green_val, end_green_val, 2)
+    ramp_pwm (CHANNEL_BLUE,  start_blue_val,  end_blue_val,  2)
 
 
     current_red_pwm   = end_red_val
