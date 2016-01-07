@@ -16,8 +16,6 @@ udp_recv_client = socket( AF_INET,SOCK_DGRAM)
 udp_recv_client.setsockopt (SOL_SOCKET, SO_REUSEADDR, 1)
 udp_recv_client.bind (ADDR)
 
-current_channel = CHANNEL_RED
-
 CHANNEL_RED   = 0
 CHANNEL_GREEN = 1
 CHANNEL_BLUE  = 2
