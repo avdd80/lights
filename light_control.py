@@ -100,12 +100,19 @@ while True:
         pwm.setPWM (2, 0, lamp_B_status * 4095)
 
     elif (data == "space"):
-        lamp_A_status = 1 - lamp_A_status
-        lamp_B_status = 1 - lamp_B_status
-        lamp_C_status = 1 - lamp_C_status
+        # If all are off, turn them on
+        if (lamp_A_status and lamp_B_status and lamp_C_status):
+            lamp_A_status = 0
+            lamp_B_status = 0
+            lamp_C_status = 0
+        else:        
+            lamp_A_status = 1
+            lamp_B_status = 1
+            lamp_C_status = 1
+
         pwm.setPWM (0, 0, lamp_A_status * 4095)
         pwm.setPWM (1, 0, lamp_B_status * 4095)
-        pwm.setPWM (2, 0, lamp_C_status * 4095)
+        pwm.setPWM (2, 0, lamp_C_status * 4095)        
         
 
     elif (data == "Up"):
