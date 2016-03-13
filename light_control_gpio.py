@@ -59,7 +59,7 @@ while True:
     data = udp_recv_client.recv(BUFSIZE)
     print data
 
-    elif (data == "space"):
+    if (data == "space"):
         # If all are off, turn them on
         if (lamp_A_status and lamp_B_status and lamp_C_status):
             lamp_A_status = 0
