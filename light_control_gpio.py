@@ -76,7 +76,7 @@ try:
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
         set_lamp_C (lamp_C_status)
-    except KeyboardInterrupt:
+except KeyboardInterrupt:
         GPIO.cleanup ()
 
 
