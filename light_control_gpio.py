@@ -69,6 +69,12 @@ try:
             lamp_A_status = 0
             lamp_B_status = 0
             lamp_C_status = 0
+            
+        # Toggle all lamps
+        elif (data =="space"):
+            lamp_A_status = 1 - lamp_A_status
+            lamp_B_status = 1 - lamp_B_status
+            lamp_C_status = 1 - lamp_C_status
 
         elif (data == "a" or data == "A" or data == "[269025046]"):
             lamp_A_status = 1
@@ -82,6 +88,7 @@ try:
             lamp_C_status = 1
         elif (data == "d" or data == "D" or data == "[269025045]"):
             lamp_C_status = 0
+
 
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
