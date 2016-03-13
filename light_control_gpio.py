@@ -54,7 +54,7 @@ try:
         init ()
     
 #    print "Waiting to receive"
-        time.sleep (0.5)
+        time.sleep (0.2)
         data = udp_recv_client.recv(BUFSIZE)
         print data
 
@@ -71,17 +71,17 @@ try:
             lamp_C_status = 0
 
         elif (data == "a" or data == "A" or data == "[269025046]"):
-            lamp_A_staus = 1
+            lamp_A_status = 1
         elif (data == "q" or data == "Q" or data == "[269025047]"):
-            lamp_A_staus = 0
+            lamp_A_status = 0
         elif (data == "b" or data == "B"):
-            lamp_B_staus = 1
+            lamp_B_status = 1
         elif (data == "g" or data == "G" or data == "F"):
-            lamp_B_staus = 0
+            lamp_B_status = 0
         elif (data == "c" or data == "C" or data == "[269025044]"):
-            lamp_C_staus = 1
+            lamp_C_status = 1
         elif (data == "d" or data == "D" or data == "[269025045]"):
-            lamp_C_staus = 0
+            lamp_C_status = 0
 
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
