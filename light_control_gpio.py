@@ -30,25 +30,24 @@ def init ():
     GPIO.setup(lamp_B_gpio, GPIO.OUT) # pin set as output
     GPIO.setup(lamp_C_gpio, GPIO.OUT) # pin set as output - unused in hardware
 
-def turn_on_lamp_A ():
-    GPIO.output(lamp_A_gpio, GPIO.HIGH)
+def set_lamp_A (status):
+    if (status == 1):
+        GPIO.output(lamp_A_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_A_gpio, GPIO.LOW)
 
-def turn_on_lamp_B ():
-    GPIO.output(lamp_B_gpio, GPIO.HIGH)
-    
-# Unused
-def turn_on_lamp_C ():
-    GPIO.output(lamp_C_gpio, GPIO.HIGH)
+def set_lamp_B (status):
+    if (status == 1):
+        GPIO.output(lamp_B_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_B_gpio, GPIO.LOW)
 
-def turn_off_lamp_A ():
-    GPIO.output(lamp_A_gpio, GPIO.LOW)
+def set_lamp_C (status):
+    if (status == 1):
+        GPIO.output(lamp_C_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_C_gpio, GPIO.LOW)
 
-def turn_off_lamp_B ():
-    GPIO.output(lamp_B_gpio, GPIO.LOW)
-
-# Unused
-def turn_off_lamp_C ():
-    GPIO.output(lamp_C_gpio, GPIO.LOW)
 
 while True:
 
@@ -61,14 +60,22 @@ while True:
 
     if (data == "space"):
         # If all are off, turn them on
-        if (lamp_A_status and lamp_B_status and lamp_C_status):
-            lamp_A_status = 0
-            lamp_B_status = 0
-            lamp_C_status = 0
-        else:        
+        if (not (lamp_A_status or lamp_B_status or lamp_C_status)):
             lamp_A_status = 1
             lamp_B_status = 1
             lamp_C_status = 1
+        else:        
+            lamp_A_status = 0
+            lamp_B_status = 0
+            lamp_C_status = 0
+            
+    if (data == "a" or data == "A")
+        lamp_A_staus = 1
+        
+
+    set_lamp_A (lamp_A_status)
+    set_lamp_B (lamp_B_status)
+    set_lamp_C (lamp_C_status)
 
 
 cli.close ()
