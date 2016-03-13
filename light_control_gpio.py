@@ -69,7 +69,7 @@ while True:
             lamp_B_status = 0
             lamp_C_status = 0
             
-    if (data == "a" or data == "A")
+    if (data == "a" or data == "A"):
         lamp_A_staus = 1
         
 
