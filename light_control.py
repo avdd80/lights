@@ -3,6 +3,7 @@
 from  socket import *
 from Adafruit_PWM_Servo_Driver import PWM
 import time
+import RPi.GPIO as GPIO
 
 
 HOST = ''
@@ -12,6 +13,11 @@ BUFSIZE = 128
 
 pwm = PWM (0x40, debug=False)
 pwm.setPWMFreq (400)
+
+lamp_A_gpio = 16
+lamp_B_gpio = 20
+lamp_C_gpio = 19 # unused
+
 udp_recv_client = socket( AF_INET,SOCK_DGRAM)
 udp_recv_client.setsockopt (SOL_SOCKET, SO_REUSEADDR, 1)
 udp_recv_client.bind (ADDR)
@@ -72,11 +78,31 @@ def set_three_channels (end_red_val, end_green_val, end_blue_val):
     
 def init ():
     
+    # Pin Setup:
+    GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
+    GPIO.setup(lamp_A_gpio, GPIO.OUT) # pin set as output
+    GPIO.setup(lamp_B_gpio, GPIO.OUT) # pin set as output
+    GPIO.setup(lamp_C_gpio, GPIO.OUT) # pin set as output - unused in hardware
 
-    pwm.setPWM (3, 0, lamp_A_status * 4095)
-    pwm.setPWM (4, 0, lamp_B_status * 4095)
-    pwm.setPWM (5, 0, lamp_C_status * 4095)
+def turn_on_lamp_A ():
+    GPIO.output(lamp_A_gpio, GPIO.HIGH)
+
+def turn_on_lamp_B ():
+    GPIO.output(lamp_B_gpio, GPIO.HIGH)
     
+# Unused
+def turn_on_lamp_C ():
+    GPIO.output(lamp_C_gpio, GPIO.HIGH)
+
+def turn_off_lamp_A ():
+    GPIO.output(lamp_A_gpio, GPIO.LOW)
+
+def turn_off_lamp_B ():
+    GPIO.output(lamp_B_gpio, GPIO.LOW)
+
+# Unused
+def turn_off_lamp_C ():
+    GPIO.output(lamp_C_gpio, GPIO.LOW)
 
 while True:
 
