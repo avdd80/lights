@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-##udp_client.py
+## light_control.py
 from  socket import *
 from Adafruit_PWM_Servo_Driver import PWM
 import time
@@ -84,80 +84,89 @@ def init ():
     GPIO.setup(lamp_B_gpio, GPIO.OUT) # pin set as output
     GPIO.setup(lamp_C_gpio, GPIO.OUT) # pin set as output - unused in hardware
 
-def turn_on_lamp_A ():
-    GPIO.output(lamp_A_gpio, GPIO.HIGH)
+def set_lamp_A (status):
+    if (status == 1):
+        GPIO.output(lamp_A_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_A_gpio, GPIO.LOW)
 
-def turn_on_lamp_B ():
-    GPIO.output(lamp_B_gpio, GPIO.HIGH)
-    
-# Unused
-def turn_on_lamp_C ():
-    GPIO.output(lamp_C_gpio, GPIO.HIGH)
+def set_lamp_B (status):
+    if (status == 1):
+        GPIO.output(lamp_B_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_B_gpio, GPIO.LOW)
 
-def turn_off_lamp_A ():
-    GPIO.output(lamp_A_gpio, GPIO.LOW)
+def set_lamp_C (status):
+    if (status == 1):
+        GPIO.output(lamp_C_gpio, GPIO.HIGH)
+    elif (status == 0):
+        GPIO.output(lamp_C_gpio, GPIO.LOW)
 
-def turn_off_lamp_B ():
-    GPIO.output(lamp_B_gpio, GPIO.LOW)
 
-# Unused
-def turn_off_lamp_C ():
-    GPIO.output(lamp_C_gpio, GPIO.LOW)
+try:
+    while True:
 
-while True:
-
-    init ()
+        init ()
     
 #    print "Waiting to receive"
-    time.sleep (0.5)
-    data = udp_recv_client.recv(BUFSIZE)
-    print data
+        time.sleep (0.2)
+        data = udp_recv_client.recv(BUFSIZE)
+        print data
     
-    if (data == "Page_Up"):
-        lamp_A_status = 1 - lamp_A_status
-        pwm.setPWM (0, 0, lamp_A_status * 4095)
-
-    elif (data == "slash"):
-        lamp_C_status = 1 - lamp_C_status
-        pwm.setPWM (1, 0, lamp_C_status * 4095)
-
-    elif (data == "Next"):
-        lamp_A_status = 1 - lamp_B_status
-        pwm.setPWM (2, 0, lamp_B_status * 4095)
-
-    elif (data == "space"):
-        # If all are off, turn them on
-        if (lamp_A_status and lamp_B_status and lamp_C_status):
-            lamp_A_status = 0
-            lamp_B_status = 0
-            lamp_C_status = 0
-        else:        
+        if (data == "Page_Up"):
+            # Turn all on
             lamp_A_status = 1
             lamp_B_status = 1
             lamp_C_status = 1
 
-        pwm.setPWM (0, 0, lamp_A_status * 4095)
-        pwm.setPWM (1, 0, lamp_B_status * 4095)
-        pwm.setPWM (2, 0, lamp_C_status * 4095)        
-        
+        elif (data == "Next"):
+            # Turn all off
+            lamp_A_status = 0
+            lamp_B_status = 0
+            lamp_C_status = 0
+            
+        # Toggle all lamps
+        elif (data =="space"):
+            lamp_A_status = 1 - lamp_A_status
+            lamp_B_status = 1 - lamp_B_status
+            lamp_C_status = 1 - lamp_C_status
 
-    elif (data == "Up"):
-        set_three_channels (current_red_pwm + 409, current_green_pwm, current_blue_pwm)
+        elif (data == "a" or data == "A" or data == "[269025046]"):
+            lamp_A_status = 1
+        elif (data == "q" or data == "Q" or data == "[269025047]"):
+            lamp_A_status = 0
+        elif (data == "Left" or data == "b" or data == "B"):
+            lamp_B_status = 1
+        elif (data == "Right" or data == "g" or data == "G"):
+            lamp_B_status = 0
+        elif (data == "c" or data == "C" or data == "[269025044]"):
+            lamp_C_status = 1
+        elif (data == "d" or data == "D" or data == "[269025045]"):
+            lamp_C_status = 0
 
-    elif (data == "Down"):
-        set_three_channels (current_red_pwm - 409, current_green_pwm, current_blue_pwm)
+        elif (data == "Up"):
+            set_three_channels (current_red_pwm + 409, current_green_pwm, current_blue_pwm)
 
-    elif (data == "Right"):
-        set_three_channels (current_red_pwm, current_green_pwm + 409, current_blue_pwm)
+        elif (data == "Down"):
+            set_three_channels (current_red_pwm - 409, current_green_pwm, current_blue_pwm)
 
-    elif (data == "Left"):
-        set_three_channels (current_red_pwm, current_green_pwm - 409, current_blue_pwm)
+        elif (data == "Right"):
+            set_three_channels (current_red_pwm, current_green_pwm + 409, current_blue_pwm)
 
-    elif (data == "[269025043]"):
-        set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
+        elif (data == "Left"):
+            set_three_channels (current_red_pwm, current_green_pwm - 409, current_blue_pwm)
 
-    elif (data == "[269025041]"):
-        set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
+        elif (data == "[269025043]"):
+            set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
+
+        elif (data == "[269025041]"):
+            set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
+
+        set_lamp_A (lamp_A_status)
+        set_lamp_B (lamp_B_status)
+        set_lamp_C (lamp_C_status)
+except KeyboardInterrupt:
+        GPIO.cleanup ()
 
 
 cli.close()
