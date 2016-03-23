@@ -49,11 +49,6 @@ def ramp_pwm (channel, start_val, end_val, rate):
     
     # Time period between two PWM duty changes
     PWM_STEP_PERIOD = 0.05 # 50 milliseconds
-    
-    if (end_val > 4095):
-        end_val = 4095
-    elif (end_val < 0):
-        end_val = 0
 
     print "ramp pwm called with start = " + str(start_val) + " end_val = " + str (end_val)
 
@@ -88,6 +83,21 @@ def set_three_channels (end_red_val, end_green_val, end_blue_val):
     global current_green_pwm
     global current_blue_pwm
     
+    if (end_red_val > 4095):
+        end_red_val = 4095
+    elif (end_red_val < 0):
+        end_red_val = 0
+
+    if (end_green_val > 4095):
+        end_green_val = 4095
+    elif (end_green_val < 0):
+        end_green_val = 0
+        
+    if (end_blue_val > 4095):
+        end_blue_val = 4095
+    elif (end_blue_val < 0):
+        end_blue_val = 0
+
     if (current_red_pwm != end_red_val):
         ramp_pwm (CHANNEL_RED,   current_red_pwm,   end_red_val,   2)
     if (current_green_pwm != end_green_val):
