@@ -187,12 +187,12 @@ try:
             set_three_channels (current_red_pwm - 409, current_green_pwm, current_blue_pwm)
 
         elif (data == "Right"):
-            set_three_channels (current_red_pwm, current_green_pwm + 409, current_blue_pwm)
             print "Right = green + "
+            set_three_channels (current_red_pwm, current_green_pwm + 409, current_blue_pwm)
 
         elif (data == "Left"):
+            print "Left = green - "
             set_three_channels (current_red_pwm, current_green_pwm - 409, current_blue_pwm)
-            print "Left = green + "
 
         elif (data == "[269025043]"):
             set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
