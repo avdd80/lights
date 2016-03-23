@@ -70,6 +70,8 @@ def ramp_pwm (channel, start_val, end_val, rate):
                 break
             print "Decr" + ':' + str (channel) + '=' + str (start_val)
 
+    print "ramp pwm exit, start_val = ' + str(start_val)
+
     # Adjust the correct PWM end value
     pwm.setPWM (channel, 0, 4095 - end_val)
 
