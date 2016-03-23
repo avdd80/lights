@@ -75,9 +75,12 @@ def set_three_channels (end_red_val, end_green_val, end_blue_val):
     global current_green_pwm
     global current_blue_pwm
     
-    ramp_pwm (CHANNEL_RED,   current_red_pwm,   end_red_val,   2)
-    ramp_pwm (CHANNEL_GREEN, current_green_pwm, end_green_val, 2)
-    ramp_pwm (CHANNEL_BLUE,  current_blue_pwm,  end_blue_val,  2)
+    if (current_red_pwm != end_red_val):
+        ramp_pwm (CHANNEL_RED,   current_red_pwm,   end_red_val,   2)
+    if (current_green_pwm != end_green_val):
+        ramp_pwm (CHANNEL_GREEN, current_green_pwm, end_green_val, 2)
+    if (current_blue_pwm != end_blue_val):
+        ramp_pwm (CHANNEL_BLUE,  current_blue_pwm,  end_blue_val,  2)
 
 
     current_red_pwm   = end_red_val
