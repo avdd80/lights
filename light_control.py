@@ -147,7 +147,7 @@ try:
 #    print "Waiting to receive"
         time.sleep (0.2)
         data = udp_recv_client.recv(BUFSIZE)
-#        print data
+        print data
     
         if (data == "Page_Up"):
             # Turn all on
