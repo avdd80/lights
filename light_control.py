@@ -49,6 +49,11 @@ def ramp_pwm (channel, start_val, end_val, rate):
     
     # Time period between two PWM duty changes
     PWM_STEP_PERIOD = 0.05 # 50 milliseconds
+    
+    if (end_val > 4095):
+        end_val = 4095
+    elif (end_val < 0):
+        end_val = 0
 
     if (start_val < end_val):
         while ((start_val < end_val) and (start_val < 4096)):
