@@ -121,7 +121,7 @@ try:
 #    print "Waiting to receive"
         time.sleep (0.2)
         data = udp_recv_client.recv(BUFSIZE)
-        print data
+#        print data
     
         if (data == "Page_Up"):
             # Turn all on
@@ -175,7 +175,7 @@ try:
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
         set_lamp_C (lamp_C_status)
-        print str (current_red_pwm) + ' ' + str (current_green_pwm)  + ' ' + str (current_blue_pwm)
+#        print str (current_red_pwm) + ' ' + str (current_green_pwm)  + ' ' + str (current_blue_pwm)
 except KeyboardInterrupt:
         GPIO.cleanup ()
 
