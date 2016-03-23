@@ -55,6 +55,8 @@ def ramp_pwm (channel, start_val, end_val, rate):
     elif (end_val < 0):
         end_val = 0
 
+    print "ramp pwm called with end_val = " + end_val
+
     if (start_val < end_val):
         while ((start_val < end_val) and (start_val < 4096)):
             pwm.setPWM (channel, 0, 4095 - start_val)
@@ -184,7 +186,7 @@ try:
             set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
 
         elif (data == "[269025041]"):
-            set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm + 409)
+            set_three_channels (current_red_pwm, current_green_pwm, current_blue_pwm - 409)
 
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
