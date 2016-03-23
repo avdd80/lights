@@ -116,10 +116,10 @@ def set_lamp_C (status):
         GPIO.output(lamp_C_gpio, GPIO.LOW)
 
 
+init ()
+
 try:
     while True:
-
-        init ()
     
 #    print "Waiting to receive"
         time.sleep (0.2)
