@@ -54,7 +54,10 @@ def ramp_pwm (channel, start_val, end_val, rate):
         while ((start_val < end_val) and (start_val < 4096)):
             pwm.setPWM (channel, 0, 4095 - start_val)
             time.sleep (PWM_STEP_PERIOD)
-            start_val = (start_val + PWM_STEP_SIZE) % 4096
+            start_val = (start_val + PWM_STEP_SIZE)
+            if (start_val > 4095):
+                start_val = 4095
+                break
             print "Incr" + ':' + str (channel) + '=' + str (start_val)
 
     else:
@@ -64,6 +67,7 @@ def ramp_pwm (channel, start_val, end_val, rate):
             start_val = start_val - PWM_STEP_SIZE
             if (start_val < 0):
                 start_val = 0
+                break
             print "Decr" + ':' + str (channel) + '=' + str (start_val)
 
     # Adjust the correct PWM end value
