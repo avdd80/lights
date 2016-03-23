@@ -22,13 +22,17 @@ udp_recv_client = socket( AF_INET,SOCK_DGRAM)
 udp_recv_client.setsockopt (SOL_SOCKET, SO_REUSEADDR, 1)
 udp_recv_client.bind (ADDR)
 
-CHANNEL_RED   = 0
-CHANNEL_GREEN = 1
+CHANNEL_GREEN = 0
+CHANNEL_RED   = 1
 CHANNEL_BLUE  = 2
 
-current_red_pwm   = 1023
-current_green_pwm = 1023
-current_blue_pwm  = 1023
+current_red_pwm   = 0
+current_green_pwm = 0
+current_blue_pwm  = 0
+
+init_red_pwm   = 1023
+init_green_pwm = 1023
+init_blue_pwm  = 1023
 
 lamp_A_status = 0
 lamp_B_status = 0
@@ -51,6 +55,7 @@ def ramp_pwm (channel, start_val, end_val, rate):
             pwm.setPWM (channel, 0, 4095 - start_val)
             time.sleep (PWM_STEP_PERIOD)
             start_val = (start_val + PWM_STEP_SIZE) % 4096
+            print start_val
 
     else:
         while ((start_val >= end_val) and (start_val >= 0)):
@@ -59,6 +64,7 @@ def ramp_pwm (channel, start_val, end_val, rate):
             start_val = start_val - PWM_STEP_SIZE
             if (start_val < 0):
                 start_val = 0
+            print start_val
 
     # Adjust the correct PWM end value
     pwm.setPWM (channel, 0, 4095 - end_val)
@@ -85,6 +91,8 @@ def init ():
     GPIO.setup(lamp_A_gpio, GPIO.OUT) # pin set as output
     GPIO.setup(lamp_B_gpio, GPIO.OUT) # pin set as output
     GPIO.setup(lamp_C_gpio, GPIO.OUT) # pin set as output - unused in hardware
+    
+    set_three_channels (init_red_pwm, init_green_pwm, init_blue_pwm)
 
 def set_lamp_A (status):
     if (status == 1):
