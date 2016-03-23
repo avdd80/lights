@@ -55,7 +55,7 @@ def ramp_pwm (channel, start_val, end_val, rate):
     elif (end_val < 0):
         end_val = 0
 
-    print "ramp pwm called with end_val = " + end_val
+    print "ramp pwm called with end_val = " + str (end_val)
 
     if (start_val < end_val):
         while ((start_val < end_val) and (start_val < 4096)):
