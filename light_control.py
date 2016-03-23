@@ -26,9 +26,9 @@ CHANNEL_RED   = 0
 CHANNEL_GREEN = 1
 CHANNEL_BLUE  = 2
 
-current_red_pwm   = 4095
-current_green_pwm = 4095
-current_blue_pwm  = 4095
+current_red_pwm   = 1023
+current_green_pwm = 1023
+current_blue_pwm  = 1023
 
 lamp_A_status = 0
 lamp_B_status = 0
@@ -50,13 +50,15 @@ def ramp_pwm (channel, start_val, end_val, rate):
         while ((start_val < end_val) and (start_val < 4096)):
             pwm.setPWM (channel, 0, 4095 - start_val)
             time.sleep (PWM_STEP_PERIOD)
-            start_val = start_val + PWM_STEP_SIZE
+            start_val = (start_val + PWM_STEP_SIZE) % 4096
 
     else:
         while ((start_val >= end_val) and (start_val >= 0)):
             pwm.setPWM (channel, 0, 4095 - start_val)
             time.sleep (PWM_STEP_PERIOD)
             start_val = start_val - PWM_STEP_SIZE
+            if (start_val < 0):
+                start_val = 0
 
     # Adjust the correct PWM end value
     pwm.setPWM (channel, 0, 4095 - end_val)
@@ -165,6 +167,7 @@ try:
         set_lamp_A (lamp_A_status)
         set_lamp_B (lamp_B_status)
         set_lamp_C (lamp_C_status)
+        print str (current_red_pwm) + ' ' + str (current_green_pwm)  + ' ' + str (current_blue_pwm)
 except KeyboardInterrupt:
         GPIO.cleanup ()
 
