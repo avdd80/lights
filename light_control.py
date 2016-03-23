@@ -171,9 +171,9 @@ try:
             lamp_A_status = 1
         elif (data == "q" or data == "Q" or data == "[269025047]"):
             lamp_A_status = 0
-        elif (data == "Left" or data == "b" or data == "B"):
+        elif (data == "b" or data == "B"):
             lamp_B_status = 1
-        elif (data == "Right" or data == "g" or data == "G"):
+        elif (data == "g" or data == "G"):
             lamp_B_status = 0
         elif (data == "c" or data == "C" or data == "[269025044]"):
             lamp_C_status = 1
