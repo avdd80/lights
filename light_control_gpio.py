@@ -58,7 +58,7 @@ try:
         data = udp_recv_client.recv(BUFSIZE)
         print data
 
-        if (data == "Page_Up" or data == "LIGHT_AB_ON"):
+        if (data == "Page_Up" or data == "LIGHT_AB_ON" or data == "1PL"):
             # Turn all on
             lamp_A_status = 1
             lamp_B_status = 1
