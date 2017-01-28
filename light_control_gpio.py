@@ -64,7 +64,7 @@ try:
             lamp_B_status = 1
             lamp_C_status = 1
 
-        elif (data == "Next" or data == "LIGHT_AB_ON"):
+        elif (data == "Next" or data == "LIGHT_AB_OFF"):
             # Turn all off
             lamp_A_status = 0
             lamp_B_status = 0
