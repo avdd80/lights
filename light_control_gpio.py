@@ -58,13 +58,13 @@ try:
         data = udp_recv_client.recv(BUFSIZE)
         print data
 
-        if (data == "Page_Up"):
+        if (data == "Page_Up" or data == "LIGHT_AB_ON"):
             # Turn all on
             lamp_A_status = 1
             lamp_B_status = 1
             lamp_C_status = 1
 
-        elif (data == "Next"):
+        elif (data == "Next" or data == "LIGHT_AB_ON"):
             # Turn all off
             lamp_A_status = 0
             lamp_B_status = 0
@@ -76,13 +76,13 @@ try:
             lamp_B_status = 1 - lamp_B_status
             lamp_C_status = 1 - lamp_C_status
 
-        elif (data == "a" or data == "A" or data == "[269025046]"):
+        elif (data == "a" or data == "A" or data == "LIGHT_A_ON" or data == "[269025046]"):
             lamp_A_status = 1
-        elif (data == "q" or data == "Q" or data == "[269025047]"):
+        elif (data == "q" or data == "Q" or data == "LIGHT_A_OFF" or data == "[269025047]"):
             lamp_A_status = 0
-        elif (data == "Left" or data == "b" or data == "B"):
+        elif (data == "Left" or data == "b" or data == "LIGHT_B_ON" or data == "B"):
             lamp_B_status = 1
-        elif (data == "Right" or data == "g" or data == "G"):
+        elif (data == "Right" or data == "g" or data == "LIGHT_B_OFF" or data == "G"):
             lamp_B_status = 0
         elif (data == "c" or data == "C" or data == "[269025044]"):
             lamp_C_status = 1
